@@ -1,10 +1,3 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/IKB1hWWedMk
-
-// Edited by SacrificeProductions
-
 var cols, rows;
 var scl = 20;
 var w = 1400;
@@ -28,8 +21,8 @@ function setup() {
 }
 
 function draw() {
-
-  flying -= 0.1;
+//  flying -= 0.1;
+  flying -= 1;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
