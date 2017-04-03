@@ -27,7 +27,7 @@ function draw(){
   y = dot.y;
   dot.x = dot.x + timeline;
   dot.y = dot.y * exp(-drift +random(-variance,variance));
-  strokeWeight(3);
+  strokeWeight(2);
   line(x,y,dot.x,dot.y);
 }
 
