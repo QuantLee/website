@@ -1,51 +1,38 @@
-var cols, rows;
-var scl = 20;
-var w = 2000;
-var h = 1600;
+var w = 1400;
+var h = 800;
+var drift = 0.0001
+var variance = 0.05;
+var timeline = 2;
 
-var flying = 0;
-
-var terrain = [];
-
-function setup() {
-  createCanvas(1000, 1000, WEBGL);
-  cols = w / scl;
-  rows = h/ scl;
-
-  for (var x = 0; x < cols; x++) {
-    terrain[x] = [];
-    for (var y = 0; y < rows; y++) {
-      terrain[x][y] = 0; //specify a default value for now
-    }
-  }
+var dot = {
+  x: 0,
+  y: h*3/5
 }
 
-function draw() {
+var col = {
+  r: 255,
+  g: 255,
+  b: 255
+}
 
-  flying -= 0.1;
-  var yoff = flying;
-  for (var y = 0; y < rows; y++) {
-    var xoff = 0;
-    for (var x = 0; x < cols; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
-      xoff += 0.2;
-    }
-    yoff += 0.2;
-  }
-
+function setup(){
+  createCanvas(w,h);
   background(0);
-  stroke(255);
-  noFill();
-  //translate(0, 50);
-  translate(width/2,height/2+20);
-  rotateX(PI/3);
-  translate(-w/2, -h/2);
-  for (var y = 0; y < rows-1; y++) {
-    beginShape(TRIANGLE_STRIP);
-    for (var x = 0; x < cols; x++) {
-      vertex(x*scl, y*scl, terrain[x][y]);
-      vertex(x*scl, (y+1)*scl, terrain[x][y+1]);
-    }
-    endShape();
-  }
 }
+
+function draw(){
+  //background(0);
+  stroke(col.r,col.g,col.b);
+  x = dot.x;
+  y = dot.y;
+  dot.x = dot.x + timeline;
+  dot.y = dot.y * exp(-drift +random(-variance,variance));
+  strokeWeight(5);
+  line(x,y,dot.x,dot.y);
+}
+
+
+
+
+
+
